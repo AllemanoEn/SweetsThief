@@ -1,7 +1,7 @@
 var socket = io();
 
 var pseudo;
-var couleur;
+var color;
              
 $(function()
 {
@@ -12,7 +12,7 @@ $(function()
         modal: true,
         buttons:
         {
-            "Se connecter": connect
+            "Login": connect
         }
     });
 
@@ -29,13 +29,13 @@ $(function()
 
 function connect()
 {
-    pseudo=$('#pseudo').val();
+    pseudo = $('#pseudo').val();
     
-    var e = document.getElementById("couleur");
+    var e = document.getElementById("color");
     couleur = e.options[e.selectedIndex].value;
     
     $('#dialog-form').dialog('close');
-    socket.emit('nouveau_client', pseudo);
+    socket.emit('new_client', pseudo);
 }
 
 //socket
@@ -43,26 +43,26 @@ socket.on('chat message', function(data)
 {
     if (data.pseudo != pseudo)
     {
-        insereMessage(data.pseudo, data.msg, data.couleur);
+        insertMessage(data.pseudo, data.msg, data.couleur);
     }
 });
 
-socket.on('nouveau_client', function(pseudo_nouveauclient)
+socket.on('new_client', function(pseudo_nouveauclient)
 {
     if (pseudo_nouveauclient != pseudo)
     {
-        nouveauclient(pseudo_nouveauclient + ' vient de se connecter !');
+        newClient(pseudo_nouveauclient + ' has just connected !');
     }   
 });
 
-socket.on('ListUser', function(TextListUser)
+socket.on('list_user', function(TextListUser)
 {
-    insereUser(TextListUser);
+    insertUser(TextListUser);
 }); 
 
-socket.on('get pseudo', function()
+socket.on('get_pseudo', function()
 {
-    socket.emit('get pseudo', pseudo);
+    socket.emit('get_pseudo', pseudo);
 }); 
 
 $("#formsend").submit(function()
@@ -70,8 +70,8 @@ $("#formsend").submit(function()
     var message = $('#send-message').val();
     if (message != "")
     {
-        socket.emit('chat message', message, couleur);
-        insereMessage(pseudo, message, couleur); // Affiche le message aussi sur notre page
+        socket.emit('chat message', message, color);
+        insertMessage(pseudo, message, color); // Show the message on the page
         $('#send-message').val('').focus();
     }
     return false;
@@ -79,18 +79,18 @@ $("#formsend").submit(function()
 
 
 // Ajoute un message dans la page
-function insereMessage(pseudo, message,couleur)
+function insertMessage(pseudo, message,couleur)
 {
-    $('#messages').prepend('<p><span style="background-color:' + couleur + ';">' + pseudo + ' :</span> ' + message + '</p>');
+    $('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ':</b></span> ' + message + '</p>');
 }
 
-function insereUser(TextListUser)
+function insertUser(TextListUser)
 {
     $("#listuser").html("");
-    $('#listuser').prepend('<p><span style="background-color:"black">' + TextListUser + '</span></p>');
+    $('#listuser').append('<p><span style="background-color:"black">' + TextListUser + '</span></p>');
 }
 
-function nouveauclient(pseudo)
+function newClient(pseudo)
 {
-    $('#messages').prepend('<p><i><font color="red">' + pseudo + '</font></i></p>');
+    $('#messages').append('<p><i><font color="red">' + pseudo + '</font></i></p>');
 }
