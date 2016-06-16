@@ -17,17 +17,15 @@
     </head>
     <body>
 		<ul id="messages"></ul>
-		
-		<form action="" id="formsend">
-		  <input id="m" autocomplete="off" /><button>Envoyé</button>
-		</form>
 	
         <div id="container">
             <div id="main" class="items">
                 <p>main</p>
             </div>
             <aside id="chat" class="items">
-                <p>chat</p>
+				<form action="" id="formsend">
+				  <input id="m" autocomplete="off" /><button>Envoyé</button>
+				</form>
             </aside>
         </div>
 		
@@ -120,7 +118,7 @@
 			  
 			  // Ajoute un message dans la page
 			function insereMessage(pseudo, message,couleur) {
-				$('#zone_chat').prepend('<p><span style="background-color:' + couleur + ';">' + pseudo + ' :</span> ' + message + '</p>');
+				$('#chat').prepend('<p><span style="background-color:' + couleur + ';">' + pseudo + ' :</span> ' + message + '</p>');
 			}
 			
 			function insereUser(TextListUser) {
@@ -130,7 +128,7 @@
 			}
 			
 			function nouveauclient(pseudo) {
-				$('#zone_chat').prepend('<p><i><font color="red">' + pseudo + '</font></i></p>');
+				$('#chat').prepend('<p><i><font color="red">' + pseudo + '</font></i></p>');
 			}
 		</script>
 		
