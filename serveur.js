@@ -31,22 +31,22 @@ setInterval(function(){ sendUserList(io.sockets) }, 2000);
 
 io.sockets.on('connection', function (socket, pseudo) {
 	
-    // Dès qu'on nous donne un pseudo, on le stocke en variable de session et on informe les autres personnes
+    // DÃ¨s qu'on nous donne un pseudo, on le stocke en variable de session et on informe les autres personnes
 		socket.on('nouveau_client', function(pseudo) {
         socket.pseudo = pseudo;
-        socket.broadcast.emit('nouveau_client', pseudo); //broadcast.emit envoie à tout le monde sauf à la socket qui l'a démarrer
+        socket.broadcast.emit('nouveau_client', pseudo); //broadcast.emit envoie Ã  tout le monde sauf Ã  la socket qui l'a dÃ©marrer
 		
-		ListUser.push(pseudo); // Ajoute un utilisateur à la liste
+		ListUser.push(pseudo); // Ajoute un utilisateur Ã  la liste
 		
 		TextListUser = ""
 		for (var i = 0; i < ListUser.length; i++){
 			TextListUser = TextListUser + ListUser[i] + "<br>";
 		}
-		socket.broadcast.emit('ListUser', TextListUser); //broadcast.emit envoie à tout le monde sauf à la socket qui l'a démarrer
-		socket.emit('ListUser', TextListUser); // Alors on doit aussi l'envoyer à celui qui a démarrer le broadcast
+		socket.broadcast.emit('ListUser', TextListUser); //broadcast.emit envoie Ã  tout le monde sauf Ã  la socket qui l'a dÃ©marrer
+		socket.emit('ListUser', TextListUser); // Alors on doit aussi l'envoyer Ã  celui qui a dÃ©marrer le broadcast
 		
 		
-		console.log(pseudo + ' est connecté !');
+		console.log(pseudo + ' est connectÃ© !');
     });
 	
 	socket.on('chat message', function(msg, couleur){
@@ -57,7 +57,7 @@ io.sockets.on('connection', function (socket, pseudo) {
 	socket.on('disconnect', function (){	
 		ListUser = [];
 		TextListUser = "";
-		socket.broadcast.emit('get pseudo');	//Quand un utilisateur se déconnecte le serveur demande a tout le monde (socket) son pseudo
+		socket.broadcast.emit('get pseudo');	//Quand un utilisateur se dÃ©connecte le serveur demande a tout le monde (socket) son pseudo
 		
 	});
 	
