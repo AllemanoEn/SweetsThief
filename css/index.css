@@ -9,15 +9,51 @@
 }
 .items
 {
-    min-height: 700px;
+    height: 100vh;
 }
 #main
 {
     width: 80%;
-    background-color: red;
+    background-color: #692A12;
 }
 #chat
 {
     width: 20%;
-    background-color: blue;
+
+    display: flex;
+    flex-direction: column;
 }
+#messages
+{
+    height: 100%;
+    background-color: #76B6A6
+}
+#send
+{
+    background-color: green;
+    padding: 5px;
+}
+
+/*
+#messages
+{
+    color: black;
+    background-color: white;
+    border-style: groove;
+    padding: 2px;
+    width: 30%;
+    margin-left: 0.5%;
+    margin-top:1%;
+}
+                  
+#listuser
+{              
+    color: black;
+    background-color: white;
+    width:15%;
+    border-style: double;
+    position: fixed;
+    top:30px;
+    right:20px;
+}
+*/

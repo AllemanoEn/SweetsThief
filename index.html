@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>SweetsThief</title>
-        <link rel="shortcut icon" href="res/favicon.ico" type="image/vnd.microsoft.icon">
+        <link rel="icon" href="res/favicon.png" type="image/png">
         <!-- Bootstrap -->
         <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
 
@@ -13,160 +13,52 @@
             <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-    <style>
-      <!-- * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-	  -->
-	  #zone_chat {
-        color: black;
-        background-color: white;
-		border-style: groove;
-        padding: 2px;
-		width: 30%;
-		margin-left: 0.5%;
-		margin-top:1%;
-      }
-	  
-	  #listuser {
-	  
-		  color: black;
-		  background-color: white;
-		  width:15%;
-		  border-style: double;
-		  position: fixed;
-		  top:30px;
-		  right:20px;
-	  }
-    </style>
         <link rel="stylesheet" href="css/index.css" type="text/css">
     </head>
     <body>
-		<ul id="messages"></ul>
-		<section id="zone_chat"></section>
         <div id="container">
             <div id="main" class="items">
-                <p>main</p>
+                <img src="res/bowl.png" type="image/png">
             </div>
             <aside id="chat" class="items">
-				<form action="" id="formsend">
-				  <input id="m" autocomplete="off" /><button>Envoyé</button>
-				</form>
+                <section id="messages" class="chat-items">
+                    <!-- messages -->
+                </section>
+                <div id="send" class="chat-items">
+                    <form action="" id="formsend">
+                        <div class="input-group">
+                            <input id="send-message" class="form-control" autocomplete="off" placeholder="Send a message..."/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary">Send</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
             </aside>
         </div>
-		
-		<!-- Popup lorsque on se connecte -->
-		<div id="dialog-form" title="Connectez-vous !">
-		  <label for="pseudo">Pseudo</label>
-		  <input type="text" id="pseudo" placeholder="Votre pseudo" class="text">
-		  <div>Choisissez une couleur</div>
-		   <select id="couleur">
-			  <option value="lightblue">bleu</option>
-			  <option value="green">vert</option>
-			  <option value="red">rouge</option>
-			  <option value="pink">rose</option>
-			  <option value="orange">orange</option>
-			  <option value="yellow">jaune</option>
-			  <option value="sandybrown">poil de chameau</option>
-			  <option value="deepskyblue">turquoise tiré sur le mauve</option>
-			</select>
-		</div>
-		
-		<script>
-			var socket = io();
-			
-			
-			var pseudo;
-			var couleur;
-			 
-		  $(function() {
-			var dialog = $( "#dialog-form" ).dialog({
-			  autoOpen: true,
-			  height: 260,
-			  width: 200,
-			  modal: true,
-			  buttons: {
-				"Se connecter": connect
-			  }
-			});
-		 
-			form = dialog.find( "form" ).on( "submit", function( event ) {
-			  event.preventDefault();
-			});
-		 
-			$( "#create-user" ).button().on( "click", function() {
-			  dialog.dialog( "open" );
-			});
-			
-		  });
-		  
-		  function connect() {
-			pseudo=$('#pseudo').val();
-			
-			var e = document.getElementById("couleur");
-			couleur = e.options[e.selectedIndex].value;
-			
-			$('#dialog-form').dialog('close');
-			socket.emit('nouveau_client', pseudo);
-		  }
-		  
-		  //socket
-		  
-			socket.on('chat message', function(data){
-				if (data.pseudo != pseudo) {
-					insereMessage(data.pseudo, data.msg, data.couleur);
-				}
-			  });
-			socket.on('nouveau_client', function(pseudo_nouveauclient){
-				if (pseudo_nouveauclient != pseudo) {
-					nouveauclient(pseudo_nouveauclient + ' vient de se connecter !');
-				}	
-			  });
-			  
-			socket.on('ListUser', function(TextListUser){
-					insereUser(TextListUser);
-			  }); 
-			  
-			socket.on('get pseudo', function(){
-					socket.emit('get pseudo', pseudo);
-			  }); 
+        
+        <!-- Popup when connecting -->
+        <div id="dialog-form" title="Login !">
+          <label for="pseudo">Pseudo</label>
+          <input type="text" id="pseudo" placeholder="Votre pseudo" class="text">
+          <div>Choose a color</div>
+           <select id="couleur">
+              <option value="lightblue">Lightblue</option>
+              <option value="green">Green</option>
+              <option value="red">Red</option>
+              <option value="pink">Pink</option>
+              <option value="orange">Orange</option>
+              <option value="yellow">Yellow</option>
+              <option value="sandybrown">Sandybrown</option>
+              <option value="deepskyblue">Deepskyblue between lightred and green</option>
+            </select>
+        </div>
 
-			$("#formsend").submit(function(){
-				var message = $('#m').val();
-				if (message != "") {
-					socket.emit('chat message', message, couleur);
-					insereMessage(pseudo, message, couleur); // Affiche le message aussi sur notre page
-					$('#m').val('').focus();
-				}
-				return false;
-			});
-			
-			  
-			  // Ajoute un message dans la page
-			function insereMessage(pseudo, message,couleur) {
-				$('#zone_chat').prepend('<p><span style="background-color:' + couleur + ';">' + pseudo + ' :</span> ' + message + '</p>');
-			}
-			
-			function insereUser(TextListUser) {
-				$("#listuser").html("");
-				
-				$('#listuser').prepend('<p><span style="background-color:"black">' + TextListUser + '</span></p>');
-			}
-			
-			function nouveauclient(pseudo) {
-				$('#zone_chat').prepend('<p><i><font color="red">' + pseudo + '</font></i></p>');
-			}
-		</script>
-		
+        <!-- Bootstrap -->
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
+        <!-- script for sockets -->
+        <script src="js/socket.io.js"></script>
         <script src="js/index.js" type="text/javascript"></script>
-		<!-- script pour les sockets -->
-		<script src="js/socket.io-1.2.0.js"></script>
     </body>
 </html>
