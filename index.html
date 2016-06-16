@@ -13,11 +13,42 @@
             <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+    <style>
+      <!-- * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+	  -->
+	  #zone_chat {
+        color: black;
+        background-color: white;
+		border-style: groove;
+        padding: 2px;
+		width: 30%;
+		margin-left: 0.5%;
+		margin-top:1%;
+      }
+	  
+	  #listuser {
+	  
+		  color: black;
+		  background-color: white;
+		  width:15%;
+		  border-style: double;
+		  position: fixed;
+		  top:30px;
+		  right:20px;
+	  }
+    </style>
         <link rel="stylesheet" href="css/index.css" type="text/css">
     </head>
     <body>
 		<ul id="messages"></ul>
-	
+		<section id="zone_chat"></section>
         <div id="container">
             <div id="main" class="items">
                 <p>main</p>
@@ -118,7 +149,7 @@
 			  
 			  // Ajoute un message dans la page
 			function insereMessage(pseudo, message,couleur) {
-				$('#chat').prepend('<p><span style="background-color:' + couleur + ';">' + pseudo + ' :</span> ' + message + '</p>');
+				$('#zone_chat').prepend('<p><span style="background-color:' + couleur + ';">' + pseudo + ' :</span> ' + message + '</p>');
 			}
 			
 			function insereUser(TextListUser) {
@@ -128,7 +159,7 @@
 			}
 			
 			function nouveauclient(pseudo) {
-				$('#chat').prepend('<p><i><font color="red">' + pseudo + '</font></i></p>');
+				$('#zone_chat').prepend('<p><i><font color="red">' + pseudo + '</font></i></p>');
 			}
 		</script>
 		
