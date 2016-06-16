@@ -16,6 +16,12 @@
         <link rel="stylesheet" href="css/index.css" type="text/css">
     </head>
     <body>
+		<ul id="messages"></ul>
+		
+		<form action="" id="formsend">
+		  <input id="m" autocomplete="off" /><button>Envoyé</button>
+		</form>
+	
         <div id="container">
             <div id="main" class="items">
                 <p>main</p>
@@ -24,8 +30,27 @@
                 <p>chat</p>
             </aside>
         </div>
+		
+		<div id="dialog-form" title="Connectez-vous !">
+		  <label for="pseudo">Pseudo</label>
+		  <input type="text" id="pseudo" placeholder="Votre pseudo" class="text">
+		  <div>Choisissez une couleur</div>
+		   <select id="couleur">
+			  <option value="lightblue">bleu</option>
+			  <option value="green">vert</option>
+			  <option value="red">rouge</option>
+			  <option value="pink">rose</option>
+			  <option value="orange">orange</option>
+			  <option value="yellow">jaune</option>
+			  <option value="sandybrown">poil de chameau</option>
+			  <option value="deepskyblue">turquoise tiré sur le mauve</option>
+			</select>
+		</div>
+		
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
         <script src="js/index.js" type="text/javascript"></script>
+		<!-- script pour les sockets -->
+		<script src="js/socket.io-1.2.0.js"></script>
     </body>
 </html>
