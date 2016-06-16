@@ -1,0 +1,23 @@
+*
+{
+    box-sizing: border-box;
+}
+#container
+{
+    display: flex;
+    flex-direction: row;
+}
+.items
+{
+    min-height: 700px;
+}
+#main
+{
+    width: 80%;
+    background-color: red;
+}
+#chat
+{
+    width: 20%;
+    background-color: blue;
+}
