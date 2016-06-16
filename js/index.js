@@ -5,7 +5,7 @@ var color;
              
 $(function()
 {
-    var dialog = $( "#dialog-form" ).dialog({
+    var dialog = $("#login-form").dialog({
         autoOpen: true,
         height: 260,
         width: 200,
@@ -34,11 +34,14 @@ function connect()
     var e = document.getElementById("color");
     couleur = e.options[e.selectedIndex].value;
     
-    $('#dialog-form').dialog('close');
+    $('#login-form').dialog('close');
     socket.emit('new_client', pseudo);
 }
 
+//
 //socket
+//
+
 socket.on('chat_message', function(data)
 {
     if (data.pseudo != pseudo)
@@ -65,6 +68,7 @@ socket.on('get_pseudo', function()
     socket.emit('get_pseudo', pseudo);
 }); 
 
+// when the send button is clicked
 $("#formsend").submit(function()
 {
     var message = escapeHtml($('#send-message').val());
@@ -95,6 +99,7 @@ function newClient(pseudo)
     $('#messages').append('<p><i><font color="red">' + pseudo + '</font></i></p>');
 }
 
+// replace chars to html chars
 function escapeHtml(text)
 {
     return text
