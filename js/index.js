@@ -109,3 +109,15 @@ function escapeHtml(text)
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 }
+
+//
+// fun part
+//
+
+
+// if it's December
+var today = new Date();
+if (today.getMonth() == 11)
+{
+    document.write('<script src="js/snowstorm.js" type="text/javascript"></script>');
+}
