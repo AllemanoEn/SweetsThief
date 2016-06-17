@@ -35,6 +35,10 @@ $(function()
 	$("#tabs").tabs();
 });
 
+$("#tabs").tabs({
+	active: 0
+});
+
 // Socket.io
 var socket = io();
 
