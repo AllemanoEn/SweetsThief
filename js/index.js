@@ -24,10 +24,11 @@ window.onresize = function(event)
 function resizeMessages()
 {
     var chat = document.getElementById('chat');
-    var messages = document.getElementById('messages');
+    var tabs = document.getElementById('ul-tabs');
 
-    // 8 because of bootstrap
-    messages.style.height = window.innerHeight - chat.offsetHeight - 8 + "px";
+    chat.style.height = "100%";
+    chat.style.height = chat.offsetHeight - tabs.offsetHeight + "px"; 
+    //messages.style.height = window.innerHeight - chat.offsetHeight - 8 + "px";
 }
 
 function resizeLogin()

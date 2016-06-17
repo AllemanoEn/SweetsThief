@@ -14,28 +14,28 @@
                 <img src="res/bowl.png" alt="Bowl">
             </div>
             <aside id="sidebar" class="items">
-				<div id="tabs">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#chat" aria-controls="chat" data-toggle="tab">Chat</a></li>
-						<li><a href="#userslist" aria-controls="userslist" data-toggle="tab">Users</a></li>
-					</ul>
-					<div id="chat" class="tab-pane active">
-						<div id="messages" class="chat-items">
-							<!-- messages -->
-						</div>
-						<form id="send" class="chat-items">
-							<div class="input-group">
-								<input id="send-message" class="form-control" autocomplete="off" placeholder="Send a message..."/>
-								<span class="input-group-btn">
-									<button class="btn btn-primary">Send</button>
-								</span>
-							</div>
-						</form>
-					</div>
-					<div id="userslist" class="tab-pane">
-						<h3>user list</h3>
-					</div>
-				</div>
+                <div id="tabs">
+                    <ul id="ul-tabs" class="nav nav-tabs">
+                        <li class="active"><a href="#chat" aria-controls="chat" data-toggle="tab">Chat</a></li>
+                        <li><a href="#userslist" aria-controls="userslist" data-toggle="tab">Users</a></li>
+                    </ul>
+                    <div id="chat" class="tab-pane active">
+                        <div id="messages" class="chat-items">
+                            <!-- messages -->
+                        </div>
+                        <form id="send" class="chat-items">
+                            <div class="input-group">
+                                <input id="send-message" class="form-control" autocomplete="off" placeholder="Send a message..."/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary">Send</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="userslist" class="tab-pane">
+                        <!-- list of connected users -->
+                    </div>
+                </div>
             </aside>
         </div>
 
@@ -67,8 +67,8 @@
         <script src="js/bootstrap.js" type="text/javascript"></script>
         <!-- script for sockets -->
         <script src="js/socket.io.js" type="text/javascript"></script>
-		<!-- Jquery UI -->
-		<script src="js/jquery-ui.js" type="text/javascript"></script>
+        <!-- Jquery UI -->
+        <script src="js/jquery-ui.js" type="text/javascript"></script>
         <!-- main script -->
         <script src="js/index.js" type="text/javascript"></script>
     </body>
