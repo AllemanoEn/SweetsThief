@@ -58,6 +58,11 @@ p
 {
     margin: 0px;
 }
+a
+{
+    color: black;
+    font-weight: bold;
+}
 
 #popup-login
 {
