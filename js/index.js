@@ -4,7 +4,8 @@
 
 var pseudo = "Anonymous";
 var color;
-var tabsize;
+var chatheight;
+var usersheight;
 
 $(document).ready(function()
 {
@@ -49,13 +50,27 @@ function resizeTabs()
     var send = document.getElementById('send');
     var userslist = document.getElementById('userslist');
 
-    messages.style.height = "100vh";
-    messages.style.height = messages.offsetHeight - tabs.offsetHeight - send.offsetHeight + "px";
+    if (messages.offsetHeight == 0)
+    {
+        messages.style.height = chatheight;
+    }
+    else
+    {
+        messages.style.height = "100vh";
+        messages.style.height = messages.offsetHeight - tabs.offsetHeight - send.offsetHeight + "px";
+        chatheight = messages.style.height;
+    }
 
-    //userslist.height = chat.style.height;
-
-    userslist.style.height = "100vh";
-    userslist.style.height = userslist.offsetHeight - tabs.offsetHeight + "px";
+    if (userslist.offsetHeight == 0)
+    {
+        userslist.style.height = usersheight;
+    }
+    else
+    {
+        userslist.style.height = "100vh";
+        userslist.style.height = userslist.offsetHeight - tabs.offsetHeight + "px";
+        usersheight = userslist.style.height;
+    }
 }
 
 function resizeLogin()
