@@ -5,7 +5,7 @@ var color;
              
 $(function()
 {
-    var dialog = $( "#dialog-form" ).dialog({
+    var dialog = $("#login-form").dialog({
         autoOpen: true,
         height: 260,
         width: 200,
@@ -29,17 +29,20 @@ $(function()
 
 function connect()
 {
-    pseudo = $('#pseudo').val();
+    pseudo = escapeHtml($('#pseudo').val());
     
     var e = document.getElementById("color");
     couleur = e.options[e.selectedIndex].value;
     
-    $('#dialog-form').dialog('close');
+    $('#login-form').dialog('close');
     socket.emit('new_client', pseudo);
 }
 
+//
 //socket
-socket.on('chat message', function(data)
+//
+
+socket.on('chat_message', function(data)
 {
     if (data.pseudo != pseudo)
     {
@@ -65,12 +68,13 @@ socket.on('get_pseudo', function()
     socket.emit('get_pseudo', pseudo);
 }); 
 
+// when the send button is clicked
 $("#formsend").submit(function()
 {
-    var message = $('#send-message').val();
+    var message = escapeHtml($('#send-message').val());
     if (message != "")
     {
-        socket.emit('chat message', message, color);
+        socket.emit('chat_message', message, color);
         insertMessage(pseudo, message, color); // Show the message on the page
         $('#send-message').val('').focus();
     }
@@ -93,4 +97,27 @@ function insertUser(TextListUser)
 function newClient(pseudo)
 {
     $('#messages').append('<p><i><font color="red">' + pseudo + '</font></i></p>');
+}
+
+// replace chars to html chars
+function escapeHtml(text)
+{
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+//
+// fun part
+//
+
+
+// if it's December
+var today = new Date();
+if (today.getMonth() == 11)
+{
+    document.write('<script src="js/snowstorm.js" type="text/javascript"></script>');
 }
