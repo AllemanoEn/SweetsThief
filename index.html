@@ -10,16 +10,17 @@
     </head>
     <body>
         <div id="container">
-            <div id="main" class="items">
+            <div id="main">
                 <img src="res/bowl.png" alt="Bowl">
             </div>
-            <aside id="sidebar" class="items">
-                <div id="tabs">
-                    <ul id="ul-tabs" class="nav nav-tabs">
-                        <li class="active"><a href="#chat" aria-controls="chat" data-toggle="tab">Chat</a></li>
-                        <li><a href="#userslist" aria-controls="userslist" data-toggle="tab">Users</a></li>
-                    </ul>
-                    <div id="chat" class="tab-pane active">
+            <aside id="sidebar">
+                <ul id="tabs" class="nav nav-tabs" role="tablist">
+                    <li class="active" role="presentation"><a href="#chat" aria-controls="chat" role="tab" data-toggle="tab" onclick="resizeTabs();">Chat</a></li>
+                    <li role="presentation"><a href="#userslist" aria-controls="userslist" role="tab" data-toggle="tab" onclick="refreshUserslist(); resizeTabs();">Users</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="chat" class="tab-pane active" role="tabpanel">
                         <div id="messages" class="chat-items">
                             <!-- messages -->
                         </div>
@@ -32,8 +33,9 @@
                             </div>
                         </form>
                     </div>
-                    <div id="userslist" class="tab-pane">
+                    <div id="userslist" class="tab-pane" role="tabpanel">
                         <!-- list of connected users -->
+                        <p>user</p>
                     </div>
                 </div>
             </aside>
@@ -56,7 +58,7 @@
             </div>
             <div class="input-group">
                 <label class="input-group-addon" for="pseudo"><b>Pseudo:</b></label>
-                <input id="pseudo" class="form-control" type="text" placeholder="Your pseudo">
+                <input id="pseudo" class="form-control" type="text" autocomplete="off" placeholder="Your pseudo">
                 <span class="input-group-btn">
                     <button class="btn btn-primary" onclick="sendLogin();">Ok</button>
                 </span>
@@ -68,7 +70,7 @@
         <!-- script for sockets -->
         <script src="js/socket.io.js" type="text/javascript"></script>
         <!-- Jquery UI -->
-        <script src="js/jquery-ui.js" type="text/javascript"></script>
+        <!--<script src="js/jquery-ui.js" type="text/javascript"></script>-->
         <!-- main script -->
         <script src="js/index.js" type="text/javascript"></script>
     </body>
