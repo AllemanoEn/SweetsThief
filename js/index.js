@@ -6,15 +6,28 @@ $(document).ready(function()
     popupLogin();
 });
 
-function popupLogin()
+window.onresize = function(event)
+{
+    resizeLogin();
+}
+
+//
+// Login popup
+//
+
+function resizeLogin()
 {
     var winW = window.innerWidth;
     var winH = window.innerHeight;
 
     var popup = document.getElementById('popup-login');
-    popup.style.maxWidth = 300 + "px";
-    popup.style.left = (winW / 2 - 150) + "px";
-    popup.style.top = (winH / 2 - 150) + "px";
+    popup.style.left = (winW / 2 - popup.offsetWidth / 2) + "px";
+    popup.style.top = (winH / 2 - popup.offsetHeight / 2) + "px";
+}
+
+function popupLogin()
+{
+    resizeLogin();
     $('#container *').prop('disabled', true);
 };
 
