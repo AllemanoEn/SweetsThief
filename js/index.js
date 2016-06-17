@@ -4,31 +4,58 @@
 
 var pseudo = "Anonymous";
 var color;
+var tabsize;
 
 $(document).ready(function()
 {
+    $('#tabs a').click(function (e)
+    {
+        e.preventDefault();
+        $(this).tab('show');
+    });
     popupLogin();
-    resizeMessages();
+    resizeTabs();
 });
 
 window.onresize = function(event)
 {
     resizeLogin();
-    resizeMessages();
+    resizeTabs();
 }
+
+//
+// tabs
+//
+/*
+$(function()
+{
+    $("#tabs").tabs();
+});
+
+$("#tabs").tabs({
+    active: 0
+});
+*/
+
 
 // 
 // Resizes
 //
 
-function resizeMessages()
+function resizeTabs()
 {
-    var chat = document.getElementById('chat');
-    var tabs = document.getElementById('ul-tabs');
+    var tabs = document.getElementById('tabs');
+    var messages = document.getElementById('messages');
+    var send = document.getElementById('send');
+    var userslist = document.getElementById('userslist');
 
-    chat.style.height = "100%";
-    chat.style.height = chat.offsetHeight - tabs.offsetHeight + "px"; 
-    //messages.style.height = window.innerHeight - chat.offsetHeight - 8 + "px";
+    messages.style.height = "100vh";
+    messages.style.height = messages.offsetHeight - tabs.offsetHeight - send.offsetHeight + "px";
+
+    //userslist.height = chat.style.height;
+
+    userslist.style.height = "100vh";
+    userslist.style.height = userslist.offsetHeight - tabs.offsetHeight + "px";
 }
 
 function resizeLogin()
@@ -61,29 +88,29 @@ function sendLogin()
     document.getElementById('popup-login').style.visibility = 'hidden';
 
     $('#container *').prop('disabled', false);
+    sendUser();
 }
-
-//
-// tabs
-//
-$(function()
-{
-	$("#tabs").tabs();
-});
-
-$("#tabs").tabs({
-	active: 0
-});
 
 //
 // Socket.io
 //
 var socket = io();
 
-
+// GET client
 socket.on('chat_message', function(pseudo, message, color)
 {
 	insertMessage(pseudo, message, color); // Show the message on the page
+});
+
+socket.on('getall_users', function(users)
+{
+    setUsers(users);
+});
+
+// GET server
+socket.on('send_user', function()
+{
+    sendUser();
 });
 
 // when the send button is clicked
@@ -98,10 +125,32 @@ $('form').submit(function()
     return false;
 });
 
+function sendUser()
+{
+    socket.emit('send_user', pseudo);
+}
+
+function refreshUserslist()
+{
+    socket.emit('getall_users');
+}
+
+//
+// Local functions
+//
 
 function insertMessage(pseudo, message,color)
 {
-    $('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ':</b></span> ' + message + '</p>');
+    $('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ':</b></span> ' + escapeHtml(message) + '</p>');
+}
+
+function setUsers(users)
+{
+    $('#userslist').html("");
+    for (var i = 0; i < users.length; i++)
+    {
+        $('#userslist').append('<p><b>' + users[i] + '</b></p>');
+    }
 }
 
 // replace chars to html chars
@@ -113,6 +162,16 @@ function escapeHtml(text)
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+}
+
+function sleep(msecs)
+{
+    var start = new Date().getTime();
+    var cur = start;
+    while(cur - start < msecs)
+    {
+        cur = new Date().getTime();
+    }
 }
 
 //
