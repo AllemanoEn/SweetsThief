@@ -1,5 +1,3 @@
-var socket = io();
-
 var pseudo = "Anonymous";
 var color;
 
@@ -7,19 +5,6 @@ $(document).ready(function()
 {
     popupLogin();
 });
-
-function connect()
-{
-	/*
-    pseudo = escapeHtml($('#pseudo').val());
-    
-    var e = document.getElementById("color");
-    couleur = e.options[e.selectedIndex].value;
-    
-    $('#login-form').dialog('close');
-	*/
-    socket.emit('new_client', 'Enzolo');
-}
 
 function popupLogin()
 {
@@ -40,10 +25,61 @@ function sendLogin()
     document.getElementById('popup-login').style.visibility = 'hidden';
 }
 
+// Socket.io
+
+var socket = io();
+
+socket.on('chat_message', function(pseudo, message, color){
+	insertMessage(pseudo, message, color); // Show the message on the page
+});
+
+// when the send button is clicked
+$('form').submit(function()
+{
+    var message = escapeHtml($('#send-message').val());
+    if (message != "")
+    {
+        socket.emit('chat_message', pseudo, message, color);
+        $('#send-message').val('').focus();
+    }
+    return false;
+});
+
+
+
+// Ajoute un message dans la page
+function insertMessage(pseudo, message,color)
+{
+    $('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ':</b></span> ' + message + '</p>');
+}
+
+
+// replace chars to html chars
+function escapeHtml(text)
+{
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
 //
-//socket
+// fun part
 //
 
+
+// if it's December
+var today = new Date();
+if (today.getMonth() == 11)
+{
+    document.write('<script src="js/snowstorm.js" type="text/javascript"></script>');
+}
+
+
+
+/*
 socket.on('chat_message', function(data)
 {
     if (data.pseudo != pseudo)
@@ -70,26 +106,7 @@ socket.on('get_pseudo', function()
     socket.emit('get_pseudo', pseudo);
 }); 
 
-// when the send button is clicked
-$("#formsend").submit(function()
-{
-    var message = escapeHtml($('#send-message').val());
-    if (message != "")
-    {
-        socket.emit('chat_message', message, color);
-        insertMessage(pseudo, message, color); // Show the message on the page
-        $('#send-message').val('').focus();
-    }
-    return false;
-});
 
-
-
-// Ajoute un message dans la page
-function insertMessage(pseudo, message,couleur)
-{
-    $('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ':</b></span> ' + message + '</p>');
-}
 
 function insertUser(TextListUser)
 {
@@ -101,26 +118,4 @@ function newClient(pseudo)
 {
     $('#messages').append('<p><i><font color="red">' + pseudo + '</font></i></p>');
 }
-
-// replace chars to html chars
-function escapeHtml(text)
-{
-    return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-//
-// fun part
-//
-
-
-// if it's December
-var today = new Date();
-if (today.getMonth() == 11)
-{
-    document.write('<script src="js/snowstorm.js" type="text/javascript"></script>');
-}
+*/

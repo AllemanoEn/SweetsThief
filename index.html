@@ -20,7 +20,7 @@
                 <div id="send" class="chat-items">
                     <form action="">
                         <div class="input-group">
-                            <input id="m" class="form-control" autocomplete="off" placeholder="Send a message..."/>
+                            <input id="send-message" class="form-control" autocomplete="off" placeholder="Send a message..."/>
                             <span class="input-group-btn">
                                 <button class="btn btn-primary">Send</button>
                             </span>
@@ -29,7 +29,6 @@
                 </div>
             </aside>
         </div>
-        <ul id="messages"></ul>
         <!-- Popup when connecting -->
         <div id="popup-login" title="Login !">
             <div class="form-group">
@@ -59,22 +58,6 @@
         <!-- script for sockets -->
         <script src="js/socket.io.js" type="text/javascript"></script>
         <!-- main script -->
-        <!-- <script src="js/index.js" type="text/javascript"></script> -->
-		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-		
-		<script>
-		  var socket = io();
-		  $('form').submit(function(){
-			socket.emit('chat message', $('#m').val());
-			$('#m').val('');
-			return false;
-		  });
-		  
-		  socket.on('chat message', function(msg){
-			$('#messages').append($('<li>').text(msg));
-		  });
-		  
-		</script>
+        <script src="js/index.js" type="text/javascript"></script>
     </body>
 </html>
