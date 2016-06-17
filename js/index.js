@@ -1,19 +1,34 @@
+//
+// Global funcs
+//
+
 var pseudo = "Anonymous";
 var color;
 
 $(document).ready(function()
 {
     popupLogin();
+    resizeMessages();
 });
 
 window.onresize = function(event)
 {
     resizeLogin();
+    resizeMessages();
 }
 
+// 
+// Resizes
 //
-// Login popup
-//
+
+function resizeMessages()
+{
+    var chat = document.getElementById('chat');
+    var messages = document.getElementById('messages');
+
+    // 8 because of bootstrap
+    messages.style.height = window.innerHeight - chat.offsetHeight - 8 + "px";
+}
 
 function resizeLogin()
 {
@@ -24,6 +39,11 @@ function resizeLogin()
     popup.style.left = (winW / 2 - popup.offsetWidth / 2) + "px";
     popup.style.top = (winH / 2 - popup.offsetHeight / 2) + "px";
 }
+
+
+//
+// Login popup
+//
 
 function popupLogin()
 {
@@ -42,8 +62,23 @@ function sendLogin()
     $('#container *').prop('disabled', false);
 }
 
+//
+// tabs
+//
+$(function()
+{
+	$("#tabs").tabs();
+});
+
+$("#tabs").tabs({
+	active: 0
+});
+
+//
 // Socket.io
+//
 var socket = io();
+
 
 socket.on('chat_message', function(pseudo, message, color)
 {
@@ -63,13 +98,10 @@ $('form').submit(function()
 });
 
 
-
-// Ajoute un message dans la page
 function insertMessage(pseudo, message,color)
 {
-    $('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ':</b></span>' + message + '</p>');
+    $('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ':</b></span> ' + message + '</p>');
 }
-
 
 // replace chars to html chars
 function escapeHtml(text)

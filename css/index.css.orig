@@ -20,6 +20,9 @@
 #sidebar
 {
     width: 20%;
+<<<<<<< HEAD
+    display: flex;
+=======
 }
 
 .items
@@ -33,13 +36,14 @@
 
 #chat
 {
-    display: flex;
+	display: flex;
+>>>>>>> upstream/master
     flex-direction: column;
 }
 
 #messages
 {
-    overflow-y: scroll;
+    height: 100%;
     background-color: #76B6A6
 }
 
@@ -72,9 +76,8 @@ p
 }
 
 
-.nav-tabs > li
-{
-  width: 50%;
+.nav-tabs > li  {
+  width : 50%;
 }
 
 
