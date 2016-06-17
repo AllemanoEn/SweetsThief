@@ -15,6 +15,7 @@ function popupLogin()
     popup.style.maxWidth = 300 + "px";
     popup.style.left = (winW / 2 - 150) + "px";
     popup.style.top = (winH / 2 - 150) + "px";
+    $('#container *').prop('disabled', true);
 };
 
 function sendLogin()
@@ -24,13 +25,15 @@ function sendLogin()
     color = selectcolor.options[selectcolor.selectedIndex].value;
 
     document.getElementById('popup-login').style.visibility = 'hidden';
+
+    $('#container *').prop('disabled', false);
 }
 
 // Socket.io
-
 var socket = io();
 
-socket.on('chat_message', function(pseudo, message, color){
+socket.on('chat_message', function(pseudo, message, color)
+{
 	insertMessage(pseudo, message, color); // Show the message on the page
 });
 
@@ -51,7 +54,7 @@ $('form').submit(function()
 // Ajoute un message dans la page
 function insertMessage(pseudo, message,color)
 {
-    $('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ':</b></span> ' + message + '</p>');
+    $('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ':</b></span>' + message + '</p>');
 }
 
 
