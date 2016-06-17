@@ -44,6 +44,14 @@ p
     margin: 0px;
 }
 
+#popup-login
+{
+    position: fixed;
+    display: block;
+    background-color: white;
+    padding: 10px;
+}
+
 /*
 #messages
 {
