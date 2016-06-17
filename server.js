@@ -11,7 +11,7 @@ app.use(express.static(__dirname + '/'));
 
 io.on('connection', function(socket){
   socket.on('chat_message', function(pseudo, message, color){
-	console.log(message);
+	//console.log(message); Affiche les msg dans la console
     io.emit('chat_message', pseudo, message, color);
   });
 });
