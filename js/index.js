@@ -25,6 +25,7 @@ function popupLogin()
     var winH = window.innerHeight;
 
     var popup = document.getElementById('popup-login');
+    popup.style.maxWidth = 300 + "px";
     popup.style.left = (winW / 2 - 150) + "px";
     popup.style.top = (winH / 2 - 150) + "px";
 };
