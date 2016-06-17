@@ -38,20 +38,27 @@
         </div>
         
         <!-- Popup when connecting -->
-        <div id="login-form" title="Login !">
-            <label for="pseudo">Pseudo</label>
-            <input type="text" id="pseudo" placeholder="Your pseudo" class="text">
-            <div>Choose a color</div>
-            <select id="couleur">
-                <option value="lightblue">Lightblue</option>
-                <option value="green">Green</option>
-                <option value="red">Red</option>
-                <option value="pink">Pink</option>
-                <option value="orange">Orange</option>
-                <option value="yellow">Yellow</option>
-                <option value="sandybrown">Sandybrown</option>
-                <option value="deepskyblue">Deepskyblue between lightred and green</option>
-            </select>
+        <div id="popup-login" title="Login !">
+            <div class="form-group">
+                <label for="color">Choose a color</label>
+                <select id="color" class="form-control">
+                    <option value="lightblue">Lightblue</option>
+                    <option value="green">Green</option>
+                    <option value="red">Red</option>
+                    <option value="pink">Pink</option>
+                    <option value="orange">Orange</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="sandybrown">Sandybrown</option>
+                    <option value="deepskyblue">Deepskyblue between lightred and green</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label class="input-group-addon" for="pseudo">Pseudo</label>
+                <input id="pseudo" class="form-control" type="text" placeholder="Your pseudo">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" onclick="sendLogin();">Ok</button>
+                </span>
+            </div>
         </div>
 
         <!-- Bootstrap -->

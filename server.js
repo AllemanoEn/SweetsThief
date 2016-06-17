@@ -73,6 +73,6 @@ http.listen(3000, function(){
   console.log('Server listening on port 3000');
 });
 
-function sendUserList(socket) {
+function sendUserList(socket){
     socket.emit('ListUser', TextListUser);
 }

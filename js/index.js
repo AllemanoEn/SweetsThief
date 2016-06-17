@@ -1,30 +1,11 @@
 var socket = io();
 
-var pseudo;
+var pseudo = "Anonymous";
 var color;
-             
-$(function()
+
+$(document).ready(function()
 {
-    var dialog = $("#login-form").dialog({
-        autoOpen: true,
-        height: 260,
-        width: 200,
-        modal: true,
-        buttons:
-        {
-            "Login": connect
-        }
-    });
-
-    form = dialog.find("form").on("submit", function(event)
-    {
-        event.preventDefault();
-    });
-
-    $("#create-user").button().on("click", function()
-    {
-        dialog.dialog("open");
-    });
+    popupLogin();
 });
 
 function connect()
@@ -36,6 +17,25 @@ function connect()
     
     $('#login-form').dialog('close');
     socket.emit('new_client', pseudo);
+}
+
+function popupLogin()
+{
+    var winW = window.innerWidth;
+    var winH = window.innerHeight;
+
+    var popup = document.getElementById('popup-login');
+    popup.style.left = (winW / 2 - 150) + "px";
+    popup.style.top = (winH / 2 - 150) + "px";
+};
+
+function sendLogin()
+{
+    pseudo = document.getElementById('pseudo').value;
+    var selectcolor = document.getElementById('color');
+    color = selectcolor.options[selectcolor.selectedIndex].value;
+
+    document.getElementById('popup-login').style.visibility = 'hidden';
 }
 
 //
