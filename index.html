@@ -6,13 +6,6 @@
         <link rel="icon" href="res/favicon.png" type="image/png">
         <!-- Bootstrap -->
         <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
-
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
         <link rel="stylesheet" href="css/index.css" type="text/css">
     </head>
     <body>
@@ -25,9 +18,9 @@
                     <!-- messages -->
                 </section>
                 <div id="send" class="chat-items">
-                    <form action="" id="formsend">
+                    <form action="">
                         <div class="input-group">
-                            <input id="send-message" class="form-control" autocomplete="off" placeholder="Send a message..."/>
+                            <input id="m" class="form-control" autocomplete="off" placeholder="Send a message..."/>
                             <span class="input-group-btn">
                                 <button class="btn btn-primary">Send</button>
                             </span>
@@ -36,7 +29,7 @@
                 </div>
             </aside>
         </div>
-        
+        <ul id="messages"></ul>
         <!-- Popup when connecting -->
         <div id="login-form" title="Login !">
             <label for="pseudo">Pseudo</label>
@@ -53,13 +46,28 @@
                 <option value="deepskyblue">Deepskyblue between lightred and green</option>
             </select>
         </div>
-
         <!-- Bootstrap -->
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
         <!-- script for sockets -->
         <script src="js/socket.io.js" type="text/javascript"></script>
         <!-- main script -->
-        <script src="js/index.js" type="text/javascript"></script>
+        <!-- <script src="js/index.js" type="text/javascript"></script> -->
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+		
+		<script>
+		  var socket = io();
+		  $('form').submit(function(){
+			socket.emit('chat message', $('#m').val());
+			$('#m').val('');
+			return false;
+		  });
+		  
+		  socket.on('chat message', function(msg){
+			$('#messages').append($('<li>').text(msg));
+		  });
+		  
+		</script>
     </body>
 </html>

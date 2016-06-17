@@ -29,13 +29,15 @@ $(function()
 
 function connect()
 {
+	/*
     pseudo = escapeHtml($('#pseudo').val());
     
     var e = document.getElementById("color");
     couleur = e.options[e.selectedIndex].value;
     
     $('#login-form').dialog('close');
-    socket.emit('new_client', pseudo);
+	*/
+    socket.emit('new_client', 'Enzolo');
 }
 
 //
@@ -80,6 +82,7 @@ $("#formsend").submit(function()
     }
     return false;
 });
+
 
 
 // Ajoute un message dans la page
