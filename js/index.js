@@ -29,6 +29,12 @@ function sendLogin()
     $('#container *').prop('disabled', false);
 }
 
+// tabs
+$(function()
+{
+	$("#tabs").tabs();
+});
+
 // Socket.io
 var socket = io();
 

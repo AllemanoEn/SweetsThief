@@ -2,32 +2,47 @@
 {
     box-sizing: border-box;
 }
+/*
+
+*/
 #container
 {
     display: flex;
     flex-direction: row;
 }
-.items
-{
-    height: 100vh;
-}
+
 #main
 {
     width: 80%;
     background-color: #692A12;
 }
-#chat
+
+#sidebar
 {
     width: 20%;
+}
 
-    display: flex;
+.items
+{
+    height: 100vh;
+}
+
+/*
+
+*/
+
+#chat
+{
+	display: flex;
     flex-direction: column;
 }
+
 #messages
 {
     height: 100%;
     background-color: #76B6A6
 }
+
 #send
 {
     background-color: green;
@@ -51,6 +66,13 @@ p
     background-color: white;
     padding: 10px;
 }
+
+
+.nav-tabs > li  {
+  width : 50%;
+}
+
+
 
 /*
 #messages
