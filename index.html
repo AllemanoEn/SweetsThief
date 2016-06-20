@@ -14,9 +14,9 @@
                 <img src="res/bowl.png" alt="Bowl">
             </div>
             <aside id="sidebar">
-                <div id="tabs">
-                    <button id="chat-tab" class="btn btn-default" onclick="selectChat();">Chat</button>
-                    <button id="users-tab" class="btn btn-default" onclick="refreshUserslist(); selectUsers();">Users</button>
+                <div id="tabs" class="btn-group" role="group">
+                    <button class="tab-button btn btn-default" type="button" onclick="selectChat();">Chat</button>
+                    <button class="tab-button btn btn-default" type="button" onclick="refreshUserslist(); selectUsers();">Users</button>
                 </div>
                 <div id="chat">
                     <div id="messages" class="chat-items">

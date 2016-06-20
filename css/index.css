@@ -6,6 +6,12 @@
 {
     box-sizing: border-box;
 }
+body
+{
+    /* TODO: mobile version */
+    min-width: 1024px;
+    min-height: 768;
+}
 
 img
 {
@@ -47,9 +53,9 @@ a
   tabs
 */
 
-#tabs
+.tab-button
 {
-    /*height: 100%;*/
+    width: 100px;
 }
 
 #chat
@@ -82,7 +88,8 @@ a
 
 #search
 {
-
+    background-color: violet;
+    padding: 5px;
 }
 
 #popup-login
