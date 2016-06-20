@@ -14,29 +14,35 @@
                 <img src="res/bowl.png" alt="Bowl">
             </div>
             <aside id="sidebar">
-                <ul id="tabs" class="nav nav-tabs" role="tablist">
-                    <li class="active" role="presentation"><a href="#chat" aria-controls="chat" role="tab" data-toggle="tab" onclick="resizeTabs();">Chat</a></li>
-                    <li role="presentation"><a href="#userslist" aria-controls="userslist" role="tab" data-toggle="tab" onclick="refreshUserslist(); resizeTabs();">Users</a></li>
-                </ul>
-
-                <div class="tab-content">
-                    <div id="chat" class="tab-pane active" role="tabpanel">
-                        <div id="messages" class="chat-items">
-                            <!-- messages -->
+                <div id="tabs">
+                    <button id="chat-tab" class="btn btn-default" onclick="selectChat();">Chat</button>
+                    <button id="users-tab" class="btn btn-default" onclick="refreshUserslist(); selectUsers();">Users</button>
+                </div>
+                <div id="chat">
+                    <div id="messages" class="chat-items">
+                        <!-- messages -->
+                    </div>
+                    <form id="send" class="chat-items">
+                        <div class="input-group">
+                            <input id="send-message" class="form-control" autocomplete="off" placeholder="Send a message..."/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary">Send</button>
+                            </span>
                         </div>
-                        <form id="send" class="chat-items">
-                            <div class="input-group">
-                                <input id="send-message" class="form-control" autocomplete="off" placeholder="Send a message..."/>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary">Send</button>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                    <div id="userslist" class="tab-pane" role="tabpanel">
+                    </form>
+                </div>
+                <div id="users">
+                    <div id="userslist">
                         <!-- list of connected users -->
-                        <p>user</p>
                     </div>
+                    <form id="search" class="chat-items">
+                        <div class="input-group">
+                            <input id="search-user" class="form-control" autocomplete="off" placeholder="Search an user..."/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary">Search</button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
             </aside>
         </div>

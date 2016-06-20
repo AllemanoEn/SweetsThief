@@ -69,11 +69,20 @@ a
     padding: 5px;
 }
 
+#users
+{
+    display: none;
+}
+
 #userslist
 {
-    height: 100%;
     overflow-y: scroll;
     background-color: orange;
+}
+
+#search
+{
+
 }
 
 #popup-login
@@ -89,12 +98,6 @@ a
 }
 
 
-.nav-tabs > li
-{
-  width: 50%;
-}
-
-
 
 /*
 #messages
@@ -107,9 +110,9 @@ a
     margin-left: 0.5%;
     margin-top:1%;
 }
-                  
+
 #listuser
-{              
+{
     color: black;
     background-color: white;
     width:15%;
