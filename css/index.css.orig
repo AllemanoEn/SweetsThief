@@ -1,25 +1,6 @@
-/*
-
-*/
-
 *
 {
     box-sizing: border-box;
-}
-
-img
-{
-    max-height: 100%;
-    max-width: 100%;
-}
-p
-{
-    margin: 0px;
-}
-a
-{
-    color: black;
-    font-weight: bold;
 }
 /*
 
@@ -34,32 +15,35 @@ a
 {
     width: 80%;
     background-color: #692A12;
-    height: 100vh;
 }
 
 #sidebar
 {
     width: 20%;
+<<<<<<< HEAD
+    display: flex;
+=======
+}
+
+.items
+{
     height: 100vh;
 }
 
 /*
-  tabs
-*/
 
-#tabs
-{
-    /*height: 100%;*/
-}
+*/
 
 #chat
 {
-    height: 100%;
+	display: flex;
+>>>>>>> upstream/master
+    flex-direction: column;
 }
 
 #messages
 {
-    overflow-y: scroll;
+    height: 100%;
     background-color: #76B6A6
 }
 
@@ -69,11 +53,14 @@ a
     padding: 5px;
 }
 
-#userslist
+img
 {
-    height: 100%;
-    overflow-y: scroll;
-    background-color: orange;
+    max-height: 100%;
+    max-width: 100%;
+}
+p
+{
+    margin: 0px;
 }
 
 #popup-login
@@ -89,9 +76,8 @@ a
 }
 
 
-.nav-tabs > li
-{
-  width: 50%;
+.nav-tabs > li  {
+  width : 50%;
 }
 
 
