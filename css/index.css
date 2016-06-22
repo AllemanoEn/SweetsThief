@@ -41,6 +41,19 @@ a
     width: 80%;
     background-color: #692A12;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#sweets
+{
+    height: 80%;
+}
+
+#actions
+{
+    height: 20%;
+    background-color: gray;
 }
 
 #sidebar

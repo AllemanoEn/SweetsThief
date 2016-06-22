@@ -95,11 +95,23 @@ function sendLogin()
     var selectcolor = document.getElementById('color');
     color = selectcolor.options[selectcolor.selectedIndex].value;
 
-    document.getElementById('popup-login').style.visibility = 'hidden';
+    $('#popup-login').hide();
 
     $('#container *').prop('disabled', false);
     sendUser();
 }
+
+// when the send button is clicked
+$('form').submit(function()
+{
+    var message = escapeHtml($('#send-message').val());
+    if (message != "")
+    {
+        socket.emit('chat_message', pseudo, message, color);
+        $('#send-message').val('').focus();
+    }
+    return false;
+});
 
 //
 // Socket.io
@@ -121,18 +133,6 @@ socket.on('getall_users', function(users)
 socket.on('send_user', function()
 {
     sendUser();
-});
-
-// when the send button is clicked
-$('form').submit(function()
-{
-    var message = escapeHtml($('#send-message').val());
-    if (message != "")
-    {
-        socket.emit('chat_message', pseudo, message, color);
-        $('#send-message').val('').focus();
-    }
-    return false;
 });
 
 function sendUser()
