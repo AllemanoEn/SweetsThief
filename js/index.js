@@ -113,6 +113,13 @@ $('form').submit(function()
     return false;
 });
 
+function updateScroll()
+{
+    var element = document.getElementById("messages");
+    element.scrollTop = element.scrollHeight;
+}
+
+
 //
 // Socket.io
 //
@@ -122,6 +129,7 @@ var socket = io();
 socket.on('chat_message', function(pseudo, message, color)
 {
   insertMessage(pseudo, message, color); // Show the message on the page
+  updateScroll();
 });
 
 socket.on('getall_users', function(users)
