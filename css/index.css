@@ -10,7 +10,6 @@ body
 {
     /* TODO: mobile version */
     min-width: 1024px;
-    min-height: 768;
 }
 
 img
@@ -106,6 +105,10 @@ a
 /*
   tabs
 */
+#tabs
+{
+    width: 100%;
+}
 
 #sidebar
 {
@@ -114,7 +117,7 @@ a
 }
 .tab-button
 {
-    width: 100px;
+    width: 33%;
 }
 
 #chat
@@ -149,6 +152,11 @@ a
 {
     background-color: violet;
     padding: 5px;
+}
+
+#stats
+{
+    background-color: lightblue;
 }
 
 #popup-login
