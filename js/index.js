@@ -113,12 +113,14 @@ $('form').submit(function()
     return false;
 });
 
-function updateScroll()
-{
-    var element = document.getElementById("messages");
-    element.scrollTop = element.scrollHeight;
-}
 
+// Function called when button submit of Searchuser is called
+function Searchuser() {
+
+alert('coucou');
+
+return true;
+}
 
 //
 // Socket.io
@@ -151,6 +153,12 @@ function sendUser()
 function refreshUserslist()
 {
     socket.emit('getall_users');
+}
+
+function updateScroll()
+{
+    var element = document.getElementById("messages");
+    element.scrollTop = element.scrollHeight;
 }
 
 //
