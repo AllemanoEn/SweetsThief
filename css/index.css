@@ -52,20 +52,60 @@ a
 
 #actions
 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     height: 20%;
     background-color: gray;
 }
 
-#sidebar
+#actions > div
 {
+    height: 100%;
     width: 20%;
-    height: 100vh;
+    
+}
+
+#actions > div > img
+{
+    height: 100%;
+    padding: 20px;
+}
+
+#cook
+{
+    background-color: green;
+}
+
+#chefs
+{
+    background-color: red;
+}
+
+#factory
+{
+    background-color: orange;
+}
+
+#thiefs
+{
+    background-color: blue;
+}
+
+#vans
+{
+    background-color: violet;
 }
 
 /*
   tabs
 */
 
+#sidebar
+{
+    width: 20%;
+    height: 100vh;
+}
 .tab-button
 {
     width: 100px;
