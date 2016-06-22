@@ -9,13 +9,8 @@ var usersheight;
 
 $(document).ready(function()
 {
-    $('#tabs a').click(function (e)
-    {
-        e.preventDefault();
-        $(this).tab('show');
-    });
     popupLogin();
-    resizeTabs();
+    selectChat();
 });
 
 window.onresize = function(event)
@@ -27,50 +22,50 @@ window.onresize = function(event)
 //
 // tabs
 //
-/*
-$(function()
+
+function selectChat()
 {
-    $("#tabs").tabs();
-});
+    document.getElementById('users').style.display = 'none';
+    document.getElementById('chat').style.display = 'block';
+    resizeTabs();
+}
 
-$("#tabs").tabs({
-    active: 0
-});
-*/
+function selectUsers()
+{
+    document.getElementById('chat').style.display = 'none';
+    document.getElementById('users').style.display = 'block';
+    resizeTabs();
+}
 
 
-// 
+//
 // Resizes
 //
 
 function resizeTabs()
 {
     var tabs = document.getElementById('tabs');
+
     var messages = document.getElementById('messages');
     var send = document.getElementById('send');
+
     var userslist = document.getElementById('userslist');
+    var search = document.getElementById('search');
 
-    if (messages.offsetHeight == 0)
-    {
-        messages.style.height = chatheight;
-    }
-    else
-    {
-        messages.style.height = "100vh";
-        messages.style.height = messages.offsetHeight - tabs.offsetHeight - send.offsetHeight + "px";
-        chatheight = messages.style.height;
-    }
+    var chat = document.getElementById('chat');
+    var users = document.getElementById('users');
 
-    if (userslist.offsetHeight == 0)
-    {
-        userslist.style.height = usersheight;
-    }
-    else
-    {
-        userslist.style.height = "100vh";
-        userslist.style.height = userslist.offsetHeight - tabs.offsetHeight + "px";
-        usersheight = userslist.style.height;
-    }
+    chat.style.height = "100vh";
+    chat.style.height = chat.offsetHeight - tabs.offsetHeight + "px";
+
+    users.style.height = "100vh";
+    users.style.height = users.offsetHeight - tabs.offsetHeight + "px";
+
+    messages.style.height = "100vh";
+    messages.style.height = messages.offsetHeight - tabs.offsetHeight - send.offsetHeight + "px";
+
+    userslist.style.height = "100vh";
+    userslist.style.height = userslist.offsetHeight - tabs.offsetHeight - search.offsetHeight + "px";
 }
 
 function resizeLogin()
@@ -100,33 +95,11 @@ function sendLogin()
     var selectcolor = document.getElementById('color');
     color = selectcolor.options[selectcolor.selectedIndex].value;
 
-    document.getElementById('popup-login').style.visibility = 'hidden';
+    $('#popup-login').hide();
 
     $('#container *').prop('disabled', false);
     sendUser();
 }
-
-//
-// Socket.io
-//
-var socket = io();
-
-// GET client
-socket.on('chat_message', function(pseudo, message, color)
-{
-	insertMessage(pseudo, message, color); // Show the message on the page
-});
-
-socket.on('getall_users', function(users)
-{
-    setUsers(users);
-});
-
-// GET server
-socket.on('send_user', function()
-{
-    sendUser();
-});
 
 // when the send button is clicked
 $('form').submit(function()
@@ -138,6 +111,28 @@ $('form').submit(function()
         $('#send-message').val('').focus();
     }
     return false;
+});
+
+//
+// Socket.io
+//
+var socket = io();
+
+// GET client
+socket.on('chat_message', function(pseudo, message, color)
+{
+  insertMessage(pseudo, message, color); // Show the message on the page
+});
+
+socket.on('getall_users', function(users)
+{
+    setUsers(users);
+});
+
+// GET server
+socket.on('send_user', function()
+{
+    sendUser();
 });
 
 function sendUser()
@@ -217,18 +212,18 @@ socket.on('new_client', function(pseudo_nouveauclient)
     if (pseudo_nouveauclient != pseudo)
     {
         newClient(pseudo_nouveauclient + ' has just connected !');
-    }   
+    }
 });
 
 socket.on('list_user', function(TextListUser)
 {
     insertUser(TextListUser);
-}); 
+});
 
 socket.on('get_pseudo', function()
 {
     socket.emit('get_pseudo', pseudo);
-}); 
+});
 
 
 

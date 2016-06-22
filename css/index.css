@@ -6,6 +6,12 @@
 {
     box-sizing: border-box;
 }
+body
+{
+    /* TODO: mobile version */
+    min-width: 1024px;
+    min-height: 768;
+}
 
 img
 {
@@ -35,6 +41,19 @@ a
     width: 80%;
     background-color: #692A12;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#sweets
+{
+    height: 80%;
+}
+
+#actions
+{
+    height: 20%;
+    background-color: gray;
 }
 
 #sidebar
@@ -47,9 +66,9 @@ a
   tabs
 */
 
-#tabs
+.tab-button
 {
-    /*height: 100%;*/
+    width: 100px;
 }
 
 #chat
@@ -69,11 +88,21 @@ a
     padding: 5px;
 }
 
+#users
+{
+    display: none;
+}
+
 #userslist
 {
-    height: 100%;
     overflow-y: scroll;
     background-color: orange;
+}
+
+#search
+{
+    background-color: violet;
+    padding: 5px;
 }
 
 #popup-login
@@ -89,12 +118,6 @@ a
 }
 
 
-.nav-tabs > li
-{
-  width: 50%;
-}
-
-
 
 /*
 #messages
@@ -107,9 +130,9 @@ a
     margin-left: 0.5%;
     margin-top:1%;
 }
-                  
+
 #listuser
-{              
+{
     color: black;
     background-color: white;
     width:15%;
