@@ -7,9 +7,11 @@ var color;
 
 var lvlcook = 0;
 var lvlchefs = 0;
+var lvlfactory = 0;
 
 var MCOOK = 1;
 var MCHEFS = 2;
+var MFACTORY = 4;
 
 var sweets = 0;
 
@@ -50,22 +52,25 @@ function upgradeChefs()
     updateStats();
 }
 
+function upgradeFactory()
+{
+    lvlfactory += 1;
+    updateStats();
+}
+
 function updateStats()
 {
-
     var stats = document.getElementById('stats');
 
-/*
-    var cook = formatNumber(lvlcook * MCOOK);
-    var chefs = formatNumber(lvlchefs * MCHEFS);
-    var tsweets = formatNumber(sweets);
-    */
+    var cook = lvlcook * MCOOK;
+    var chefs = lvlchefs * MCHEFS;
+    var factory = lvlfactory * MFACTORY;
 
-
-    stats.innerHTML = "<p><b>Total: </b>" + sweets + " Sweets</p><br/>";
-    stats.innerHTML += "<p><b>Cook: </b>" + (lvlcook * MCOOK) + " Sweets/sec</p>";
-    stats.innerHTML += "<p><b>Chefs: </b>" + (lvlchefs * MCHEFS) + " Sweets/sec</p>";
-    stats.innerHTML += "<p><b>Factory: </b>" + " Sweets/sec</p>";
+    stats.innerHTML = "<p><b>Cook: </b>" + cook + " Sweets/sec</p>";
+    stats.innerHTML += "<p><b>Chefs: </b>" + chefs + " Sweets/sec</p>";
+    stats.innerHTML += "<p><b>Factory: </b>" + " Sweets/sec</p><br/>";
+    stats.innerHTML += "<p><b>Total per second: </b>" + (cook + chefs + factory) + " Sweets/sec</p><br/>";
+    stats.innerHTML += "<p><b>Total: </b>" + sweets + " Sweets</p><br/>";
 }
 
 
@@ -167,7 +172,7 @@ function sendLogin()
 }
 
 // when the send button is clicked
-$('form').submit(function()
+function sendMessage()
 {
     var message = escapeHtml($('#send-message').val());
     if (message != "")
@@ -178,6 +183,16 @@ $('form').submit(function()
     return false;
 });
 
+
+// Function called when button search is clicked
+function searchUser()
+{
+    var userslist = document.getElementById('userslist');
+    userslist.innerHTML = 'test';
+    $('#search-user').val('').focus();
+    return true;
+}
+
 //
 // Socket.io
 //
@@ -187,6 +202,7 @@ var socket = io();
 socket.on('chat_message', function(pseudo, message, color)
 {
     insertMessage(pseudo, message, color); // Show the message on the page
+    updateScroll();
 });
 
 socket.on('getall_users', function(users)
@@ -210,11 +226,17 @@ function refreshUserslist()
     socket.emit('getall_users');
 }
 
+function updateScroll()
+{
+    var element = document.getElementById("messages");
+    element.scrollTop = element.scrollHeight;
+}
+
 //
 // Local functions
 //
 
-function insertMessage(pseudo, message,color)
+function insertMessage(pseudo, message, color)
 {
     $('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ':</b></span> ' + escapeHtml(message) + '</p>');
 }
@@ -251,7 +273,7 @@ function formatNumber(num)
     }
     return Number(numf);
 }
-*/
+
 
 Math.m = function()
 {
@@ -262,6 +284,7 @@ Math.m = function()
     }
     return Array.prototype.reduce.call(arguments, cb, 1);
 };
+*/
 
 function sleep(msecs)
 {

@@ -128,7 +128,7 @@ a
 #messages
 {
     overflow-y: scroll;
-    background-color: #76B6A6
+    background-color: #76B6A6;
 }
 
 #send
@@ -150,7 +150,7 @@ a
 
 #search
 {
-    background-color: violet;
+    background-color: red;
     padding: 5px;
 }
 

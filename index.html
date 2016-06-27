@@ -45,7 +45,7 @@
                     <div id="userslist">
                         <!-- list of connected users -->
                     </div>
-                    <form id="search" class="chat-items">
+                    <form id="search" class="chat-items" onsubmit="return searchUser();">
                         <div class="input-group">
                             <input id="search-user" class="form-control" autocomplete="off" placeholder="Search an user..."/>
                             <span class="input-group-btn">
@@ -58,7 +58,7 @@
                     <div id="messages" class="chat-items">
                         <!-- messages -->
                     </div>
-                    <form id="send" class="chat-items">
+                    <form id="send" class="chat-items" onsubmit="return sendMessage();">
                         <div class="input-group">
                             <input id="send-message" class="form-control" autocomplete="off" placeholder="Send a message..."/>
                             <span class="input-group-btn">
