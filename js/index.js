@@ -171,6 +171,17 @@ function sendLogin()
     sendUser();
 }
 
+$('form').submit(function()
+{
+    var message = escapeHtml($('#send-message').val());
+    if (message != "")
+    {
+        socket.emit('chat_message', pseudo, message, color);
+        $('#send-message').val('').focus();
+    }
+    return false;
+});
+
 // when the send button is clicked
 function sendMessage()
 {
