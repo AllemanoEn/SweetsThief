@@ -5,6 +5,8 @@
 // DEBUG
 var debug = true;
 
+var port = 8080;
+
 
 var express = require('express');
 var app = express();
@@ -27,22 +29,42 @@ io.on('connection', function(socket)
         io.emit('chat_message', pseudo, message, color);
         if (debug)
         {
-            console.log("[CHAT MSG] " + pseudo + ": " + message);
+            console.log("[CHAT MESSAGE] " + pseudo + ": " + message);
         }
     });
 
-    socket.on('getall_users', function()
+    socket.on('getall_users', function(pattern)
     {
-        io.emit('getall_users', users);
-        if (debug)
+        if (pattern == '')
         {
-            console.log("[GETALL USERS] " + users);
+            socket.emit('getall_users', users);
+            if (debug)
+            {
+                console.log("[GETALL USERS] " + users);
+            }
+        }
+        else
+        {
+            var corrusers = [];
+            for (var i = 0; i < users.length; i++)
+            {
+                if (users[i].indexOf(pattern) != -1)
+                {
+                    corrusers.push(users[i]);
+                }
+            }
+            socket.emit('getall_users', corrusers);
+            if (debug)
+            {
+                console.log("[GETALL USERS PATTERN=" + pattern + "] " + corrusers);
+            }
         }
     });
 
     socket.on('send_user', function(user)
     {
         users.push(user);
+        io.emit('refresh_users');
         if (debug)
         {
             console.log("[SEND USER] " + user);
@@ -52,11 +74,11 @@ io.on('connection', function(socket)
     socket.on('disconnect', function()
     {
         users = [];
-        socket.broadcast.emit('send_user');
+        io.emit('send_user');
     });
 });
 
-http.listen(8080, function()
+http.listen(port, function()
 {
-    console.log('Listening on port 8080');
+    console.log('Listening on port ' + port + '.');
 });
