@@ -11,20 +11,16 @@
     <body>
         <div id="container">
             <div id="main">
-			
-			<ul class="nav nav-tabs">
-			  <li class="active"><a href="#Game" data-toggle="tab">Game</a></li>
-			  <li><a href="#Items" data-toggle="tab">Grow up your factory</a></li>
-			</ul>
-			<div class="tab-content">
-					<div class="tab-pane active" id="Game">
-
-					</div>
-					<div class="tab-pane" id="Items">
-
-					</div>
+			<div id="tabs" class="btn-group" role="group">
+				<button class="tab-button btn btn-default" type="button" onclick="selectGame()";>Game</button>
+				<button class="tab-button btn btn-default" type="button" onclick="selectItems()";>Grow up your factory</button>
+            </div>
+			<div id="Game">
+				<!-- stats -->
+            </div>
+				<div id="Items">
+				<!-- stats -->
 			</div>
-			
 			
                 <div id="sweets">
                     <img src="res/bowl.png" alt="Bowl">
@@ -46,6 +42,7 @@
                         <img class="img-responsive center-block" src="res/void.png" alt="Vans">
                     </div>
                 </div>
+				
             </div>
             <aside id="sidebar">
                 <div id="tabs" class="btn-group" role="group">
