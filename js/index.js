@@ -181,7 +181,7 @@ function sendLogin()
 // when the send button is clicked
 function sendMessage()
 {
-    var message = escapeHtml($('#send-message').val());
+    var message = $('#send-message').val();
     if (message != "")
     {
         socket.emit('chat_message', pseudo, message, color);
@@ -265,11 +265,12 @@ function setUsers(users)
 function escapeHtml(text)
 {
     return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace('&', '&amp;')
+        .replace('<', '&lt;')
+        .replace('>', '&gt;')
+        .replace('"', '&quot;')
+        .replace("'", '&#39;')
+        .replace('/', '&#x2F;');
 }
 
 // format numbers, example: 2.33000004 -> 2.33
