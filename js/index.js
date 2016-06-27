@@ -250,7 +250,14 @@ function updateScroll()
 
 function insertMessage(pseudo, message, color)
 {
-    $('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ':</b></span> ' + escapeHtml(message) + '</p>');
+	if(message.includes("extadri"))
+	{
+		$('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ': </b></span>' + escapeHtml(message) + '<img src="res/emotes/extadri.png" alt="extadri" style="width:10%;height:10%;"></p>');
+	}
+	else
+	{
+		$('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ':</b></span> ' + escapeHtml(message) + '</p>');
+	}
 }
 
 function setUsers(users)
@@ -308,6 +315,11 @@ function commandMessage(message)
             case 'clear':
                 message = '';
                 $('#messages').html('');
+                $('#send-message').val('').focus();
+                break;
+			case 'extadri':
+                message = '';
+                $('#messages').append('<p><img src="res/emotes/extadri.png" alt="extadri" style="width:10%;height:10%;"></p>');
                 $('#send-message').val('').focus();
                 break;
             case 'help':
