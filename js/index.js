@@ -274,31 +274,6 @@ function escapeHtml(text)
         .replace('/', '&#x2F;');
 }
 
-// format numbers, example: 2.33000004 -> 2.33
-/*
-function formatNumber(num)
-{
-    var numf = String(num);
-    if (numf.includes("."))
-    {
-        var cs = numf.split('.');
-        numf = cs[0] + "." + cs[1].substring(0, 2);
-    }
-    return Number(numf);
-}
-
-
-Math.m = function()
-{
-    var f = _cf.apply(null, arguments);
-    function cb(x, y, i, o)
-    {
-        return (x * f) * (y * f) / (f * f);
-    }
-    return Array.prototype.reduce.call(arguments, cb, 1);
-};
-*/
-
 function sleep(msecs)
 {
     var start = new Date().getTime();
