@@ -4,13 +4,21 @@
 
 var pseudo = "Anonymous";
 var color;
-var chatheight;
-var usersheight;
+
+var lvlcook = 0;
+var lvlchefs = 0;
+
+var MCOOK = 1;
+var MCHEFS = 2;
+
+var sweets = 0;
 
 $(document).ready(function()
 {
     popupLogin();
-    selectChat();
+    selectStats();
+    updateStats();
+    setInterval(timer, 1000);
 });
 
 window.onresize = function(event)
@@ -19,21 +27,73 @@ window.onresize = function(event)
     resizeTabs();
 }
 
+function timer()
+{
+    sweets += lvlcook * MCOOK;
+    sweets += lvlchefs * MCHEFS;
+    updateStats();
+}
+
+//
+// Cook
+//
+
+function upgradeCook()
+{
+    lvlcook += 1;
+    updateStats();
+}
+
+function upgradeChefs()
+{
+    lvlchefs += 1;
+    updateStats();
+}
+
+function updateStats()
+{
+
+    var stats = document.getElementById('stats');
+
+/*
+    var cook = formatNumber(lvlcook * MCOOK);
+    var chefs = formatNumber(lvlchefs * MCHEFS);
+    var tsweets = formatNumber(sweets);
+    */
+
+
+    stats.innerHTML = "<p><b>Total: </b>" + sweets + " Sweets</p><br/>";
+    stats.innerHTML += "<p><b>Cook: </b>" + (lvlcook * MCOOK) + " Sweets/sec</p>";
+    stats.innerHTML += "<p><b>Chefs: </b>" + (lvlchefs * MCHEFS) + " Sweets/sec</p>";
+    stats.innerHTML += "<p><b>Factory: </b>" + " Sweets/sec</p>";
+}
+
+
 //
 // tabs
 //
 
-function selectChat()
+function selectStats()
 {
+    document.getElementById('stats').style.display = 'block';
     document.getElementById('users').style.display = 'none';
-    document.getElementById('chat').style.display = 'block';
+    document.getElementById('chat').style.display = 'none';
     resizeTabs();
 }
 
 function selectUsers()
 {
-    document.getElementById('chat').style.display = 'none';
+    document.getElementById('stats').style.display = 'none';
     document.getElementById('users').style.display = 'block';
+    document.getElementById('chat').style.display = 'none';
+    resizeTabs();
+}
+
+function selectChat()
+{
+    document.getElementById('stats').style.display = 'none';
+    document.getElementById('users').style.display = 'none';
+    document.getElementById('chat').style.display = 'block';
     resizeTabs();
 }
 
@@ -55,6 +115,8 @@ function resizeTabs()
     var chat = document.getElementById('chat');
     var users = document.getElementById('users');
 
+    var stats = document.getElementById('stats');
+
     chat.style.height = "100vh";
     chat.style.height = chat.offsetHeight - tabs.offsetHeight + "px";
 
@@ -66,6 +128,9 @@ function resizeTabs()
 
     userslist.style.height = "100vh";
     userslist.style.height = userslist.offsetHeight - tabs.offsetHeight - search.offsetHeight + "px";
+
+    stats.style.height = "100vh";
+    stats.style.height = stats.offsetHeight - tabs.offsetHeight + "px";
 }
 
 function resizeLogin()
@@ -130,8 +195,8 @@ var socket = io();
 // GET client
 socket.on('chat_message', function(pseudo, message, color)
 {
-  insertMessage(pseudo, message, color); // Show the message on the page
-  updateScroll();
+    insertMessage(pseudo, message, color); // Show the message on the page
+    updateScroll();
 });
 
 socket.on('getall_users', function(users)
@@ -190,6 +255,30 @@ function escapeHtml(text)
         .replace(/'/g, "&#039;");
 }
 
+// format numbers, example: 2.33000004 -> 2.33
+/*
+function formatNumber(num)
+{
+    var numf = String(num);
+    if (numf.includes("."))
+    {
+        var cs = numf.split('.');
+        numf = cs[0] + "." + cs[1].substring(0, 2);
+    }
+    return Number(numf);
+}
+*/
+
+Math.m = function()
+{
+    var f = _cf.apply(null, arguments);
+    function cb(x, y, i, o)
+    {
+        return (x * f) * (y * f) / (f * f);
+    }
+    return Array.prototype.reduce.call(arguments, cb, 1);
+};
+
 function sleep(msecs)
 {
     var start = new Date().getTime();
@@ -211,46 +300,3 @@ if (today.getMonth() == 11)
 {
     document.write('<script src="js/snowstorm.js" type="text/javascript"></script>');
 }
-
-
-
-/*
-socket.on('chat_message', function(data)
-{
-    if (data.pseudo != pseudo)
-    {
-        insertMessage(data.pseudo, data.msg, data.couleur);
-    }
-});
-
-socket.on('new_client', function(pseudo_nouveauclient)
-{
-    if (pseudo_nouveauclient != pseudo)
-    {
-        newClient(pseudo_nouveauclient + ' has just connected !');
-    }
-});
-
-socket.on('list_user', function(TextListUser)
-{
-    insertUser(TextListUser);
-});
-
-socket.on('get_pseudo', function()
-{
-    socket.emit('get_pseudo', pseudo);
-});
-
-
-
-function insertUser(TextListUser)
-{
-    $("#listuser").html("");
-    $('#listuser').append('<p><span style="background-color:"black">' + TextListUser + '</span></p>');
-}
-
-function newClient(pseudo)
-{
-    $('#messages').append('<p><i><font color="red">' + pseudo + '</font></i></p>');
-}
-*/

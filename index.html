@@ -16,39 +16,30 @@
                 </div>
                 <div id="actions">
                     <div id="cook">
-                        <img class="img-responsive center-block" src="res/cook.png" alt="Void">
+                        <img class="img-responsive center-block" src="res/cook.png" alt="Cook" onclick="upgradeCook();">
                     </div>
                     <div id="chefs">
-                        <img class="img-responsive center-block" src="res/chefs.png" alt="Void">
+                        <img class="img-responsive center-block" src="res/chefs.png" alt="Chefs" onclick="upgradeChefs();">
                     </div>
                     <div id="factory">
-                        <img class="img-responsive center-block" src="res/factory.png" alt="Void">
+                        <img class="img-responsive center-block" src="res/factory.png" alt="Factory">
                     </div>
                     <div id="thiefs">
-                        <img class="img-responsive center-block" src="res/void.png" alt="Void">
+                        <img class="img-responsive center-block" src="res/void.png" alt="Thiefs">
                     </div>
                     <div id="vans">
-                        <img class="img-responsive center-block" src="res/void.png" alt="Void">
+                        <img class="img-responsive center-block" src="res/void.png" alt="Vans">
                     </div>
                 </div>
             </div>
             <aside id="sidebar">
                 <div id="tabs" class="btn-group" role="group">
-                    <button class="tab-button btn btn-default" type="button" onclick="selectChat();">Chat</button>
+                    <button class="tab-button btn btn-default" type="button" onclick="selectStats();">Stats</button>
                     <button class="tab-button btn btn-default" type="button" onclick="refreshUserslist(); selectUsers();">Users</button>
+                    <button class="tab-button btn btn-default" type="button" onclick="selectChat();">Chat</button>
                 </div>
-                <div id="chat">
-                    <div id="messages" class="chat-items">
-                        <!-- messages -->
-                    </div>
-                    <form id="send" class="chat-items">
-                        <div class="input-group">
-                            <input id="send-message" class="form-control" autocomplete="off" placeholder="Send a message..."/>
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary">Send</button>
-                            </span>
-                        </div>
-                    </form>
+                <div id="stats">
+                    <!-- stats -->
                 </div>
                 <div id="users">
                     <div id="userslist">
@@ -59,6 +50,19 @@
                             <input id="search-user" class="form-control" autocomplete="off" placeholder="Search an user..."/>
                             <span class="input-group-btn">
                                 <button class="btn btn-primary">Search</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div id="chat">
+                    <div id="messages" class="chat-items">
+                        <!-- messages -->
+                    </div>
+                    <form id="send" class="chat-items">
+                        <div class="input-group">
+                            <input id="send-message" class="form-control" autocomplete="off" placeholder="Send a message..."/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary">Send</button>
                             </span>
                         </div>
                     </form>
