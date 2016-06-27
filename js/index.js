@@ -181,7 +181,8 @@ function sendLogin()
 // when the send button is clicked
 function sendMessage()
 {
-    var message = escapeHtml($('#send-message').val());
+    var message = $('#send-message').val();
+    message = commandMessage(message);
     if (message != "")
     {
         socket.emit('chat_message', pseudo, message, color);
@@ -265,11 +266,12 @@ function setUsers(users)
 function escapeHtml(text)
 {
     return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace('&', '&amp;')
+        .replace('<', '&lt;')
+        .replace('>', '&gt;')
+        .replace('"', '&quot;')
+        .replace("'", '&#39;')
+        .replace('/', '&#x2F;');
 }
 
 // format numbers, example: 2.33000004 -> 2.33
@@ -317,4 +319,29 @@ var today = new Date();
 if (today.getMonth() == 11)
 {
     document.write('<script src="js/snowstorm.js" type="text/javascript"></script>');
+}
+
+function commandMessage(message)
+{
+    if (message.indexOf('!') == 0)
+    {
+        switch (message.substring(1))
+        {
+            case 'lj':
+                message = 'LEEROOOOOOOOOOOOOOOY JENKIIIIIIIINS !';
+                break;
+            case 'clear':
+                message = '';
+                $('#messages').html('');
+                $('#send-message').val('').focus();
+                break;
+            case 'help':
+            default:
+                message = '';
+                $('#messages').append('<p><span style="background-color: green;">!help !lj !clear</span></p>');
+                $('#send-message').val('').focus();
+                break;
+        }
+    }
+    return message;
 }
