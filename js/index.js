@@ -194,8 +194,7 @@ function sendMessage()
 // Function called when button search is clicked
 function searchUser()
 {
-    var search = $('#search-user').val();
-    socket.emit('getall_users', search);
+    refreshUserslist();
     return false;
 }
 
@@ -216,6 +215,11 @@ socket.on('getall_users', function(users)
     setUsers(users);
 });
 
+socket.on('refresh_users', function()
+{
+    refreshUserslist();
+});
+
 // GET server
 socket.on('send_user', function()
 {
@@ -229,7 +233,8 @@ function sendUser()
 
 function refreshUserslist()
 {
-    socket.emit('getall_users');
+    var pattern = $('#search-user').val();
+    socket.emit('getall_users', pattern);
 }
 
 function updateScroll()
