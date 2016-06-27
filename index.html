@@ -71,7 +71,7 @@
         </div>
 
         <!-- Popup when connecting -->
-        <form id="popup-login" title="Login !">
+        <form id="popup-login" title="Login !" onsubmit="return sendLogin();">
             <div class="form-group">
                 <label for="color"><b>Choose a color:</b></label>
                 <select id="color" class="form-control">
@@ -89,7 +89,7 @@
                 <label class="input-group-addon" for="pseudo"><b>Pseudo:</b></label>
                 <input id="pseudo" class="form-control" type="text" autocomplete="off" placeholder="Your pseudo">
                 <span class="input-group-btn">
-                    <button class="btn btn-primary" onclick="sendLogin();">Ok</button>
+                    <button class="btn btn-primary">Ok</button>
                 </span>
             </div>
         </form>

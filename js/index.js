@@ -159,6 +159,7 @@ function popupLogin()
     $('#container *').prop('disabled', true);
 };
 
+// when an user login
 function sendLogin()
 {
     pseudo = document.getElementById('pseudo').value;
@@ -169,18 +170,8 @@ function sendLogin()
 
     $('#container *').prop('disabled', false);
     sendUser();
-}
-
-$('form').submit(function()
-{
-    var message = escapeHtml($('#send-message').val());
-    if (message != "")
-    {
-        socket.emit('chat_message', pseudo, message, color);
-        $('#send-message').val('').focus();
-    }
     return false;
-});
+}
 
 // when the send button is clicked
 function sendMessage()
@@ -192,16 +183,17 @@ function sendMessage()
         $('#send-message').val('').focus();
     }
     return false;
-});
+};
 
 
 // Function called when button search is clicked
 function searchUser()
 {
-    var userslist = document.getElementById('userslist');
-    userslist.innerHTML = 'test';
+    var corrusers;
+
+    $('#userslist').html(corrusers);
     $('#search-user').val('').focus();
-    return true;
+    return false;
 }
 
 //
