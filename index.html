@@ -46,12 +46,7 @@
                         <!-- list of connected users -->
                     </div>
                     <form id="search" class="chat-items" onsubmit="return searchUser();">
-                        <div class="input-group">
-                            <input id="search-user" class="form-control" autocomplete="off" placeholder="Search an user..."/>
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary">Search</button>
-                            </span>
-                        </div>
+                        <input id="search-user" class="form-control" type="text" autocomplete="off" placeholder="Search an user..."/>
                     </form>
                 </div>
                 <div id="chat">
@@ -60,7 +55,7 @@
                     </div>
                     <form id="send" class="chat-items" onsubmit="return sendMessage();">
                         <div class="input-group">
-                            <input id="send-message" class="form-control" autocomplete="off" placeholder="Send a message..."/>
+                            <input id="send-message" class="form-control" type="text" autocomplete="off" placeholder="Send a message..."/>
                             <span class="input-group-btn">
                                 <button class="btn btn-primary">Send</button>
                             </span>

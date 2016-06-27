@@ -23,6 +23,11 @@ $(document).ready(function()
     setInterval(timer, 1000);
 });
 
+$('#search').on('input', function()
+{
+    searchUser();
+})
+
 window.onresize = function(event)
 {
     resizeLogin();
@@ -189,10 +194,8 @@ function sendMessage()
 // Function called when button search is clicked
 function searchUser()
 {
-    var corrusers;
-
-    $('#userslist').html(corrusers);
-    $('#search-user').val('').focus();
+    var search = $('#search-user').val();
+    socket.emit('getall_users', search);
     return false;
 }
 
