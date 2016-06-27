@@ -182,9 +182,9 @@ function sendLogin()
 function sendMessage()
 {
     var message = $('#send-message').val();
+    message = commandMessage(message);
     if (message != "")
     {
-        message = commandMessage(message);
         socket.emit('chat_message', pseudo, message, color);
         $('#send-message').val('').focus();
     }
@@ -325,12 +325,21 @@ function commandMessage(message)
 {
     if (message.indexOf('!') == 0)
     {
-        switch (message)
+        switch (message.substring(1))
         {
-            case '!lj':
-                message = 'LEEROOOOOOOOOOOOOOOY JENKIIIIIIIINS';
+            case 'lj':
+                message = 'LEEROOOOOOOOOOOOOOOY JENKIIIIIIIINS !';
                 break;
+            case 'clear':
+                message = '';
+                $('#messages').html('');
+                $('#send-message').val('').focus();
+                break;
+            case 'help':
             default:
+                message = '';
+                $('#messages').append('<p><span style="background-color: green;">!help !lj !clear</span></p>');
+                $('#send-message').val('').focus();
                 break;
         }
     }
