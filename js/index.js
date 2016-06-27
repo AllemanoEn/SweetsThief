@@ -184,6 +184,7 @@ function sendMessage()
     var message = $('#send-message').val();
     if (message != "")
     {
+        message = commandMessage(message);
         socket.emit('chat_message', pseudo, message, color);
         $('#send-message').val('').focus();
     }
@@ -318,4 +319,20 @@ var today = new Date();
 if (today.getMonth() == 11)
 {
     document.write('<script src="js/snowstorm.js" type="text/javascript"></script>');
+}
+
+function commandMessage(message)
+{
+    if (message.indexOf('!') == 0)
+    {
+        switch (message)
+        {
+            case '!lj':
+                message = 'LEEROOOOOOOOOOOOOOOY JENKIIIIIIIINS';
+                break;
+            default:
+                break;
+        }
+    }
+    return message;
 }
