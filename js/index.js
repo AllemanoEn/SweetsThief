@@ -7,9 +7,11 @@ var color;
 
 var lvlcook = 0;
 var lvlchefs = 0;
+var lvlfactory = 0;
 
 var MCOOK = 1;
 var MCHEFS = 2;
+var MFACTORY = 4;
 
 var sweets = 0;
 
@@ -20,6 +22,11 @@ $(document).ready(function()
     updateStats();
     setInterval(timer, 1000);
 });
+
+$('#search').on('input', function()
+{
+    searchUser();
+})
 
 window.onresize = function(event)
 {
@@ -50,22 +57,25 @@ function upgradeChefs()
     updateStats();
 }
 
+function upgradeFactory()
+{
+    lvlfactory += 1;
+    updateStats();
+}
+
 function updateStats()
 {
-
     var stats = document.getElementById('stats');
 
-/*
-    var cook = formatNumber(lvlcook * MCOOK);
-    var chefs = formatNumber(lvlchefs * MCHEFS);
-    var tsweets = formatNumber(sweets);
-    */
+    var cook = lvlcook * MCOOK;
+    var chefs = lvlchefs * MCHEFS;
+    var factory = lvlfactory * MFACTORY;
 
-
-    stats.innerHTML = "<p><b>Total: </b>" + sweets + " Sweets</p><br/>";
-    stats.innerHTML += "<p><b>Cook: </b>" + (lvlcook * MCOOK) + " Sweets/sec</p>";
-    stats.innerHTML += "<p><b>Chefs: </b>" + (lvlchefs * MCHEFS) + " Sweets/sec</p>";
-    stats.innerHTML += "<p><b>Factory: </b>" + " Sweets/sec</p>";
+    stats.innerHTML = "<p><b>Cook: </b>" + cook + " Sweets/sec</p>";
+    stats.innerHTML += "<p><b>Chefs: </b>" + chefs + " Sweets/sec</p>";
+    stats.innerHTML += "<p><b>Factory: </b>" + " Sweets/sec</p><br/>";
+    stats.innerHTML += "<p><b>Total per second: </b>" + (cook + chefs + factory) + " Sweets/sec</p><br/>";
+    stats.innerHTML += "<p><b>Total: </b>" + sweets + " Sweets</p><br/>";
 }
 
 
@@ -154,6 +164,7 @@ function popupLogin()
     $('#container *').prop('disabled', true);
 };
 
+// when an user login
 function sendLogin()
 {
     pseudo = document.getElementById('pseudo').value;
@@ -164,10 +175,11 @@ function sendLogin()
 
     $('#container *').prop('disabled', false);
     sendUser();
+    return false;
 }
 
 // when the send button is clicked
-$('form').submit(function()
+function sendMessage()
 {
     var message = escapeHtml($('#send-message').val());
     if (message != "")
@@ -176,15 +188,15 @@ $('form').submit(function()
         $('#send-message').val('').focus();
     }
     return false;
-});
+};
 
 
-// Function called when button submit of Searchuser is called
-function Searchuser() {
-
-alert('coucou');
-
-return true;
+// Function called when button search is clicked
+function searchUser()
+{
+    var search = $('#search-user').val();
+    socket.emit('getall_users', search);
+    return false;
 }
 
 //
@@ -230,7 +242,7 @@ function updateScroll()
 // Local functions
 //
 
-function insertMessage(pseudo, message,color)
+function insertMessage(pseudo, message, color)
 {
     $('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ':</b></span> ' + escapeHtml(message) + '</p>');
 }
@@ -267,7 +279,7 @@ function formatNumber(num)
     }
     return Number(numf);
 }
-*/
+
 
 Math.m = function()
 {
@@ -278,6 +290,7 @@ Math.m = function()
     }
     return Array.prototype.reduce.call(arguments, cb, 1);
 };
+*/
 
 function sleep(msecs)
 {
