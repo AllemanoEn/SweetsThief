@@ -15,6 +15,8 @@ var MFACTORY = 4;
 
 var sweets = 0;
 
+var emotes = { "extadri" : 1, "joyolo" : 2, "donogland": 3 };
+
 $(document).ready(function()
 {
     popupLogin();
@@ -250,14 +252,22 @@ function updateScroll()
 
 function insertMessage(pseudo, message, color)
 {
-	if(message.includes("extadri"))
+	var msgemote
+	var pos
+	message = escapeHtml(message);
+	for(var s in emotes)
 	{
-		$('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ': </b></span>' + escapeHtml(message) + '<img src="res/emotes/extadri.png" alt="extadri" style="width:10%;height:10%;"></p>');
+		pos = message.search(s);
+		if(pos!=-1)
+		{
+			message.substring(pos);
+		}
 	}
-	else
-	{
-		$('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ':</b></span> ' + escapeHtml(message) + '</p>');
-	}
+	
+		message = message.replace('!extadri', '<img src="res/emotes/extadri.png" alt="extadri" style="width:10%;height:10%;">');
+	
+
+	$('#messages').append('<p><span style="background-color:' + color + ';"><b>' + pseudo + ':</b></span> ' + message + '</p>');
 }
 
 function setUsers(users)
@@ -317,17 +327,14 @@ function commandMessage(message)
                 $('#messages').html('');
                 $('#send-message').val('').focus();
                 break;
-			case 'extadri':
-                message = '';
-                $('#messages').append('<p><img src="res/emotes/extadri.png" alt="extadri" style="width:10%;height:10%;"></p>');
-                $('#send-message').val('').focus();
-                break;
+			case '?':
             case 'help':
-            default:
                 message = '';
                 $('#messages').append('<p><span style="background-color: green;">!help !lj !clear</span></p>');
                 $('#send-message').val('').focus();
                 break;
+			default:
+				break;
         }
     }
     return message;
